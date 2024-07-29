@@ -1,0 +1,15 @@
+import { Options } from '@mikro-orm/core';
+import { Job } from './src/db/entities/job.entity';
+import { Appliances } from './src/db/entities/appliances.entity';
+
+const config: Options = {
+entities: ['dist/**/*.entity.js'],
+entitiesTs: ['src/**/*.entity.ts'],
+dbName:
+clientUrl:
+migrations: {
+path: './src/db/migrations'
+},
+};
+
+export default config;
