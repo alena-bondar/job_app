@@ -1,26 +1,25 @@
 import * as nodemailer from 'nodemailer';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.ethereal.email',
-  port: 587,
-  security: false,
+  host: process.env.EMAIL_HOST,
+  port: process.env.EMAIL_PORT,
   auth: {
-    user: 'janis.hand50@ethereal.email',
-    pass: 'dByRb23DZ2KUp2JDgS',
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
 export async function sendConfirmApplication(receiver) {
   try {
-    console.log('receiver.userEmail', receiver.userEmail);
-
     return await transporter.sendMail({
       from: 'janis.hand50@ethereal.email',
       to: receiver.userEmail,
       subject: 'Application',
-      html: '<b>Your application has been successfully submitted.</b>',
+      html: '<b>A new job application has been received.</b>',
     });
   } catch (error) {
-    throw new Error(`Failed to send confirmation email. Error: ${error}`);
+    throw new Error('Failed to send confirmation email.');
   }
 }

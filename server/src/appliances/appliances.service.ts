@@ -1,27 +1,24 @@
-import {BadRequestException, Injectable} from '@nestjs/common';
-import { CreateApplianceDto } from './dto/create-appliance.dto';
-import {InjectRepository} from "@mikro-orm/nestjs";
-import {Job} from "../job/entities/job.entity";
-import {JobRepository} from "../job/job.repository";
-import {EntityManager} from "@mikro-orm/core";
-import {AppliancesRepository} from "./appliances.repository";
-import {Appliances} from "./entities/appliances.entity";
-import {sendConfirmApplication} from "../mailer/confirm-application";
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@mikro-orm/nestjs';
+import { EntityManager } from '@mikro-orm/core';
+import { AppliancesRepository } from './appliances.repository';
+import { Appliances } from './entities/appliances.entity';
+import { sendConfirmApplication } from '../mailer/confirm-application';
 
 @Injectable()
 export class AppliancesService {
   constructor(
-      @InjectRepository(Appliances) private readonly appliancesRepository: AppliancesRepository,
-      private readonly em: EntityManager,
+    @InjectRepository(Appliances)
+    private readonly appliancesRepository: AppliancesRepository,
+    private readonly em: EntityManager,
   ) {}
 
- async create(appliancesData: Partial<Appliances>): Promise<Appliances> {
+  async create(appliancesData: Partial<Appliances>): Promise<Appliances> {
     const appliance = this.appliancesRepository.create(appliancesData);
     await this.em.persistAndFlush(appliance);
-     console.log('appliancesData', appliancesData)
     await sendConfirmApplication(appliancesData);
 
-     return appliance;
+    return appliance;
   }
 
   findAll() {
