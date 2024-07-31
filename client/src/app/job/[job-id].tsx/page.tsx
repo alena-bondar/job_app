@@ -1,7 +1,31 @@
+import { useRouter } from 'next/router';
 
-export default function JobIdPage () {
+const JobIdPage = async () => {
+  const router = useRouter();
+  const { id } = router.query;
+
+  async function getJobsById() {
+    return fetch(`${process.env.NEXT_API_URL}/job/${id}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch job');
+        }
+        return response.json();
+      })
+      .then(data => data)
+      .catch(() => null);
+  }
+
+  const job = getJobsById();
 
   return (
-    <div>It is job page</div>
-  )
+    <div>
+      <h1>Job Details</h1>
+              <h2>{job}</h2>
+              <p>{job}</p>
+              <p><strong>Company:</strong>{job}</p>
+    </div>
+  );
 }
+
+export default JobIdPage;
