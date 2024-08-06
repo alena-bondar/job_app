@@ -1,17 +1,19 @@
-import React from 'react';
+import React from "react";
 
-export default function RootLayout({ children }: {
-  children: React.ReactNode
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-    <body className="min-h-screen flex flex-col bg-gray-100">
-    <main className="flex-grow flex items-center justify-center">
-      <div className="w-full max-w-4xl rounded-lg p-6 h-1/2">
-        {children}
-      </div>
-    </main>
-    </body>
+      <body className="min-h-screen flex flex-col bg-gray-100">
+        <main className="flex-grow flex items-center justify-center">
+          <div className="w-full max-w-4xl rounded-lg px-6 h-1/2">
+            {children}
+          </div>
+        </main>
+      </body>
     </html>
-  )
+  );
 }
