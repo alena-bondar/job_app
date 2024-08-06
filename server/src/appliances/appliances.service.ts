@@ -21,8 +21,8 @@ export class AppliancesService {
     return appliance;
   }
 
-  findAll() {
-    return `This action returns all appliances`;
+  async findAll(): Promise<Appliances[]> {
+    return await this.appliancesRepository.findAll();
   }
 
   findOne(id: number) {

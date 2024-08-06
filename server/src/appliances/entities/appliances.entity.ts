@@ -1,7 +1,7 @@
 import { Entity, OneToOne, PrimaryKey, Property } from '@mikro-orm/core';
 import { Job } from '../../job/entities/job.entity';
 import { AppliancesRepository } from '../appliances.repository';
-import {v4} from "uuid";
+import { v4 } from 'uuid';
 
 @Entity({ repository: () => AppliancesRepository })
 export class Appliances {

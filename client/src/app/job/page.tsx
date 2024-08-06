@@ -1,11 +1,10 @@
 import { JobData } from "@/types";
 import Link from "next/link";
-import { getJobs } from "@/app/job/api/getJobs";
-import '@/styles/globals.css';
+import "@/styles/globals.css";
+import { getJobs } from "@/app/api/route";
 
 const JobPage = async () => {
-  const allJobs = getJobs();
-  const [jobs] = await Promise.all([allJobs]);
+  const jobs = await getJobs();
 
   return (
     <div className="min-h-screen p-6">

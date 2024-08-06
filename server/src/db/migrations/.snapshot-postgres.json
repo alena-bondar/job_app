@@ -1,7 +1,5 @@
 {
-  "namespaces": [
-    "public"
-  ],
+  "namespaces": ["public"],
   "name": "public",
   "tables": [
     {
@@ -50,9 +48,7 @@
       "schema": "public",
       "indexes": [
         {
-          "columnNames": [
-            "company_name"
-          ],
+          "columnNames": ["company_name"],
           "composite": false,
           "keyName": "job_company_name_unique",
           "constraint": true,
@@ -61,9 +57,7 @@
         },
         {
           "keyName": "job_pkey",
-          "columnNames": [
-            "job_id"
-          ],
+          "columnNames": ["job_id"],
           "composite": false,
           "constraint": true,
           "primary": true,
@@ -128,9 +122,7 @@
       "schema": "public",
       "indexes": [
         {
-          "columnNames": [
-            "job_id"
-          ],
+          "columnNames": ["job_id"],
           "composite": false,
           "keyName": "appliances_job_id_unique",
           "constraint": true,
@@ -139,9 +131,7 @@
         },
         {
           "keyName": "appliances_pkey",
-          "columnNames": [
-            "id"
-          ],
+          "columnNames": ["id"],
           "composite": false,
           "constraint": true,
           "primary": true,
@@ -152,13 +142,9 @@
       "foreignKeys": {
         "appliances_job_id_foreign": {
           "constraintName": "appliances_job_id_foreign",
-          "columnNames": [
-            "job_id"
-          ],
+          "columnNames": ["job_id"],
           "localTableName": "public.appliances",
-          "referencedColumnNames": [
-            "job_id"
-          ],
+          "referencedColumnNames": ["job_id"],
           "referencedTableName": "public.job",
           "updateRule": "cascade"
         }

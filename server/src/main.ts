@@ -9,7 +9,7 @@ async function bootstrap() {
     methods: 'GET,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
-
+  app.setGlobalPrefix('api');
   await app.listen(5000);
 }
 bootstrap();
