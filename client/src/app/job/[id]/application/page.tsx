@@ -1,22 +1,15 @@
 "use client";
 
-import React from "react";
+import axios from "axios";
+import { zodResolver } from "@hookform/resolvers/zod";
+import "@/styles/globals.css";
 import { useForm, Controller } from "react-hook-form";
 import { ApplicationData, JobDetailTypes } from "@/types";
-import "@/styles/globals.css";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import axios from "axios";
-
-const schema = z.object({
-  userName: z.string().min(5, { message: "Must be 5 or more characters long" }),
-  userEmail: z.string().email({ message: "Invalid email address" }),
-  applianceText: z
-    .string()
-    .min(5, { message: "Must be 5 or more characters long" }),
-});
-
-type FormData = z.infer<typeof schema>;
+import {
+  applicationSchema,
+  FormData,
+  initialValuesApplication,
+} from "@/app/job/[id]/application/validation";
 
 const JobApplicationPage = ({ params }: JobDetailTypes) => {
   const { id } = params;
@@ -27,12 +20,8 @@ const JobApplicationPage = ({ params }: JobDetailTypes) => {
     formState: { errors, isSubmitting },
     reset,
   } = useForm<FormData>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      userName: "",
-      userEmail: "",
-      applianceText: "",
-    },
+    resolver: zodResolver(applicationSchema),
+    defaultValues: initialValuesApplication,
   });
 
   const onSubmit = async (values: Omit<ApplicationData, "jobId">) => {

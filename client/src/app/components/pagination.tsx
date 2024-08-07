@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from 'react';
 import { JobData } from "@/types";
 import Link from "next/link";
 
@@ -7,7 +7,7 @@ type PaginationProps = {
   getPaginatedJobs: (page: number) => JobData[];
 };
 
-const Pagination: React.FC<PaginationProps> = ({
+const Pagination: FC<PaginationProps> = ({
   totalPages,
   getPaginatedJobs,
 }) => {
@@ -49,7 +49,7 @@ const Pagination: React.FC<PaginationProps> = ({
           </li>
         ))}
       </ul>
-      {totalPages > 1 && (
+      {totalPages > 4 && (
         <nav className="flex justify-end my-4">
           <ul className="flex items-center h-8 text-m">
             <li className="list-none">
@@ -67,7 +67,7 @@ const Pagination: React.FC<PaginationProps> = ({
                   onClick={() => handlePageChange(page)}
                   className={`flex items-center justify-center px-3 h-8 ${
                     currentPage === page
-                      ? "z-10 text-cyan-600"
+                      ? "z-10 text-cyan-600 font-semibold"
                       : "hover:text-cyan-600"
                   }`}
                 >
