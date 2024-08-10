@@ -11,11 +11,11 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export async function sendConfirmApplication(receiver) {
+export async function sendConfirmApplication(companyEmail: string) {
   try {
     return await transporter.sendMail({
       from: 'janis.hand50@ethereal.email',
-      to: receiver.userEmail,
+      to: companyEmail,
       subject: 'Application',
       html: '<b>A new job application has been received.</b>',
     });

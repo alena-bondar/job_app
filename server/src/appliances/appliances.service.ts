@@ -14,9 +14,14 @@ export class AppliancesService {
   ) {}
 
   async create(appliancesData: Partial<Appliances>): Promise<Appliances> {
+    const companyId = appliancesData.companyId;
+
+    const { companyEmail } =
+      await this.appliancesRepository.findEmailByCompanyId(companyId);
+
     const appliance = this.appliancesRepository.create(appliancesData);
     await this.em.persistAndFlush(appliance);
-    await sendConfirmApplication(appliancesData);
+    await sendConfirmApplication(companyEmail);
 
     return appliance;
   }

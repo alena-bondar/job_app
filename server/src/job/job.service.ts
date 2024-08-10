@@ -1,12 +1,9 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Job } from './entities/job.entity';
 import { EntityManager } from '@mikro-orm/core';
 import { JobRepository } from './job.repository';
 import { InjectRepository } from '@mikro-orm/nestjs';
+import { JobWithCompanyName } from '../types';
 
 @Injectable()
 export class JobService {
@@ -16,30 +13,35 @@ export class JobService {
   ) {}
 
   async create(jobData: Partial<Job>): Promise<Job> {
-    const existingJob = await this.jobRepository.findOne({
-      companyName: jobData.companyName,
-    });
-    if (existingJob) {
-      throw new BadRequestException(
-        `Company with name ${jobData.companyName} already exists`,
-      );
-    }
-
     const job = this.jobRepository.create(jobData);
     await this.em.persistAndFlush(job);
     return job;
   }
 
-  async findAll(): Promise<Job[]> {
-    return await this.jobRepository.findAll();
+  async findAll(): Promise<JobWithCompanyName[]> {
+    const jobs = await this.jobRepository.findAllWithCompanyName();
+
+    return jobs.map((job) => ({
+      jobId: job.jobId,
+      jobName: job.jobName,
+      jobDescription: job.jobDescription,
+      companyName: job.companyId.companyName,
+    }));
   }
 
-  async findOne(id: string): Promise<Job> {
-    const job = await this.jobRepository.findOne({ jobId: id });
+  async findOne(jobId: string): Promise<JobWithCompanyName> {
+    const job = await this.jobRepository.findOneWithCompanyName(jobId);
+
     if (!job) {
-      throw new NotFoundException(`Job not found`);
+      throw new NotFoundException(`Job with ID ${jobId} not found`);
     }
-    return job;
+
+    return {
+      jobId: job.jobId,
+      jobName: job.jobName,
+      jobDescription: job.jobDescription,
+      companyName: job.companyId.companyName,
+    };
   }
 
   async remove(id: string): Promise<Job> {

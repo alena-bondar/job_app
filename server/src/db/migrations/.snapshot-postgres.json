@@ -1,7 +1,68 @@
 {
-  "namespaces": ["public"],
+  "namespaces": [
+    "public"
+  ],
   "name": "public",
   "tables": [
+    {
+      "columns": {
+        "company_id": {
+          "name": "company_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "company_name": {
+          "name": "company_name",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "text"
+        },
+        "company_email": {
+          "name": "company_email",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 255,
+          "mappedType": "string"
+        }
+      },
+      "name": "company",
+      "schema": "public",
+      "indexes": [
+        {
+          "columnNames": [
+            "company_name"
+          ],
+          "composite": false,
+          "keyName": "company_company_name_unique",
+          "constraint": true,
+          "primary": false,
+          "unique": true
+        },
+        {
+          "keyName": "company_pkey",
+          "columnNames": [
+            "company_id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {},
+      "nativeEnums": {}
+    },
     {
       "columns": {
         "job_id": {
@@ -33,31 +94,24 @@
           "length": 255,
           "mappedType": "string"
         },
-        "company_name": {
-          "name": "company_name",
-          "type": "varchar(255)",
+        "company_id": {
+          "name": "company_id",
+          "type": "uuid",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "length": 255,
-          "mappedType": "string"
+          "mappedType": "uuid"
         }
       },
       "name": "job",
       "schema": "public",
       "indexes": [
         {
-          "columnNames": ["company_name"],
-          "composite": false,
-          "keyName": "job_company_name_unique",
-          "constraint": true,
-          "primary": false,
-          "unique": true
-        },
-        {
           "keyName": "job_pkey",
-          "columnNames": ["job_id"],
+          "columnNames": [
+            "job_id"
+          ],
           "composite": false,
           "constraint": true,
           "primary": true,
@@ -65,7 +119,20 @@
         }
       ],
       "checks": [],
-      "foreignKeys": {},
+      "foreignKeys": {
+        "job_company_id_foreign": {
+          "constraintName": "job_company_id_foreign",
+          "columnNames": [
+            "company_id"
+          ],
+          "localTableName": "public.job",
+          "referencedColumnNames": [
+            "company_id"
+          ],
+          "referencedTableName": "public.company",
+          "updateRule": "cascade"
+        }
+      },
       "nativeEnums": {}
     },
     {
@@ -81,6 +148,15 @@
         },
         "job_id": {
           "name": "job_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "company_id": {
+          "name": "company_id",
           "type": "uuid",
           "unsigned": false,
           "autoincrement": false,
@@ -122,7 +198,9 @@
       "schema": "public",
       "indexes": [
         {
-          "columnNames": ["job_id"],
+          "columnNames": [
+            "job_id"
+          ],
           "composite": false,
           "keyName": "appliances_job_id_unique",
           "constraint": true,
@@ -131,7 +209,9 @@
         },
         {
           "keyName": "appliances_pkey",
-          "columnNames": ["id"],
+          "columnNames": [
+            "id"
+          ],
           "composite": false,
           "constraint": true,
           "primary": true,
@@ -142,10 +222,26 @@
       "foreignKeys": {
         "appliances_job_id_foreign": {
           "constraintName": "appliances_job_id_foreign",
-          "columnNames": ["job_id"],
+          "columnNames": [
+            "job_id"
+          ],
           "localTableName": "public.appliances",
-          "referencedColumnNames": ["job_id"],
+          "referencedColumnNames": [
+            "job_id"
+          ],
           "referencedTableName": "public.job",
+          "updateRule": "cascade"
+        },
+        "appliances_company_id_foreign": {
+          "constraintName": "appliances_company_id_foreign",
+          "columnNames": [
+            "company_id"
+          ],
+          "localTableName": "public.appliances",
+          "referencedColumnNames": [
+            "company_id"
+          ],
+          "referencedTableName": "public.company",
           "updateRule": "cascade"
         }
       },

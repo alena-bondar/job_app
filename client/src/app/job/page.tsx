@@ -1,8 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import axios from "axios";
 import "@/styles/globals.css";
-import { useEffect, useState } from "react";
 import { JobData } from "@/types";
 import Pagination from "@/app/components/pagination";
 
@@ -28,7 +28,6 @@ const JobPage = () => {
 
   return (
     <div className="min-h-screen pt-4 px-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">All Jobs</h1>
       {jobs.length ? (
         <Pagination
           getPaginatedJobs={getPaginatedJobs}

@@ -7,6 +7,9 @@ export class CreateApplianceDto {
   @IsUUID()
   jobId: string;
 
+  @IsUUID()
+  companyId: string;
+
   @MinLength(2, {
     message: 'User name is too short. Minimal length is 2 characters',
   })
