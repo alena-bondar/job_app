@@ -5,6 +5,7 @@ import axios from "axios";
 import "@/styles/globals.css";
 import { JobData } from "@/types";
 import Pagination from "@/app/components/pagination";
+import Link from "next/link";
 
 const JobPage = () => {
   const [jobs, setJobs] = useState<JobData[]>([]);
@@ -27,7 +28,13 @@ const JobPage = () => {
   };
 
   return (
-    <div className="min-h-screen pt-4 px-6">
+    <div className="min-h-screen">
+      <Link
+        className="flex justify-center py-4 text-cyan-600"
+        href={"/job/create"}
+      >
+        Create a new job
+      </Link>
       {jobs.length ? (
         <Pagination
           getPaginatedJobs={getPaginatedJobs}
