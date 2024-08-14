@@ -1,22 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
 import "@/styles/globals.css";
 import { CompanyData } from "@/types";
 import Link from "next/link";
+import useStore from '@/store/store';
 
 const CompanyPage = () => {
-  const [companies, setCompanies] = useState<CompanyData[]>([]);
-
-  useEffect(() => {
-    const getCompany = async () => {
-      const fetchedCompany = await axios.get(`/api/company`);
-      setCompanies(fetchedCompany.data);
-    };
-
-    getCompany();
-  }, []);
+  const { companies } = useStore();
 
   return (
     <div className="min-h-screen">
@@ -30,7 +20,7 @@ const CompanyPage = () => {
         <ul className="space-y-4">
           {companies.map((company: CompanyData) => (
             <li
-              key={company.companyId}
+              key={company.companyName}
               className="bg-white shadow-xl rounded-lg py-4 px-6"
             >
               <h2 className="text-2xl font-semibold mb-2">

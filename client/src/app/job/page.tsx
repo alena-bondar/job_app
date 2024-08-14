@@ -1,24 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
 import "@/styles/globals.css";
-import { JobData } from "@/types";
 import Pagination from "@/app/components/pagination";
 import Link from "next/link";
+import useStore from '@/store/store';
 
 const JobPage = () => {
-  const [jobs, setJobs] = useState<JobData[]>([]);
+  const { jobs } = useStore();
   const itemsPerPage = 4;
-
-  useEffect(() => {
-    const getJobs = async () => {
-      const fetchedJobs = await axios.get(`/api/job`);
-      setJobs(fetchedJobs.data);
-    };
-
-    getJobs();
-  }, []);
 
   const totalPages = Math.ceil(jobs.length / itemsPerPage);
 

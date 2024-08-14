@@ -19,7 +19,4 @@ export class CreateJobDto {
     message: 'Job description is too long. Maximal length is 100 characters',
   })
   jobDescription: string;
-
-  @IsUUID()
-  companyId: string;
 }

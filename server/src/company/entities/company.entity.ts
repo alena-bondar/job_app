@@ -7,7 +7,7 @@ export class Company {
   @PrimaryKey({ type: 'uuid' })
   companyId: string = v4();
 
-  @Property({ unique: true, type: 'text' })
+  @Property()
   companyName!: string;
 
   @Property()

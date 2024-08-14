@@ -17,12 +17,13 @@
         },
         "company_name": {
           "name": "company_name",
-          "type": "text",
+          "type": "varchar(255)",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "mappedType": "text"
+          "length": 255,
+          "mappedType": "string"
         },
         "company_email": {
           "name": "company_email",
@@ -38,16 +39,6 @@
       "name": "company",
       "schema": "public",
       "indexes": [
-        {
-          "columnNames": [
-            "company_name"
-          ],
-          "composite": false,
-          "keyName": "company_company_name_unique",
-          "constraint": true,
-          "primary": false,
-          "unique": true
-        },
         {
           "keyName": "company_pkey",
           "columnNames": [
@@ -155,15 +146,6 @@
           "nullable": false,
           "mappedType": "uuid"
         },
-        "company_id": {
-          "name": "company_id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "mappedType": "uuid"
-        },
         "user_name": {
           "name": "user_name",
           "type": "varchar(255)",
@@ -192,6 +174,15 @@
           "primary": false,
           "nullable": false,
           "mappedType": "text"
+        },
+        "company_id": {
+          "name": "company_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
         }
       },
       "name": "appliances",

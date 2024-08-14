@@ -2,7 +2,7 @@ import { IsEmail, IsUUID, MaxLength, MinLength } from 'class-validator';
 
 export class CreateCompanyDto {
   @IsUUID()
-  companyId: number;
+  companyId: string;
 
   @IsEmail()
   companyEmail: string;
