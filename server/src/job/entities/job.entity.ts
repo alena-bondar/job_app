@@ -16,4 +16,7 @@ export class Job {
 
   @ManyToOne(() => Company, { fieldName: 'company_id', type: 'uuid' })
   companyId!: Company;
+
+  @Property()
+  deleted: boolean = false;
 }

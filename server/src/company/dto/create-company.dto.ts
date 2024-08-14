@@ -1,4 +1,10 @@
-import { IsEmail, IsUUID, MaxLength, MinLength } from 'class-validator';
+import {
+  IsBoolean,
+  IsEmail,
+  IsUUID,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class CreateCompanyDto {
   @IsUUID()
@@ -14,4 +20,7 @@ export class CreateCompanyDto {
     message: 'Company name is too long. Maximal length is 20 characters',
   })
   companyName: string;
+
+  @IsBoolean()
+  deleted: boolean = false;
 }

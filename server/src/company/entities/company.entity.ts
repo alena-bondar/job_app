@@ -12,4 +12,7 @@ export class Company {
 
   @Property()
   companyEmail!: string;
+
+  @Property()
+  deleted: boolean = false;
 }

@@ -3,19 +3,34 @@
 import "@/styles/globals.css";
 import { CompanyData } from "@/types";
 import Link from "next/link";
-import useStore from '@/store/store';
+import useStore from "@/store/store";
+import axios from 'axios';
 
 const CompanyPage = () => {
-  const { companies } = useStore();
+  const { companies, role } = useStore();
+  const isUserRole = role === "user";
+
+  const handleRemoveCompany = async (id: string) => {
+    try {
+      const response = await axios.patch(`/api/company/${id}`);
+      if (response.status === 200) {
+        window.location.replace("/job");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  };
 
   return (
-    <div className="min-h-screen">
-      <Link
-        className="flex justify-center py-4 text-cyan-600"
-        href={"/company/create"}
-      >
-        Create a new company
-      </Link>
+    <div>
+      {!isUserRole && (
+        <Link
+          className="flex justify-center pb-4 text-cyan-600"
+          href={"/company/create"}
+        >
+          Create a new company
+        </Link>
+      )}
       {companies.length ? (
         <ul className="space-y-4">
           {companies.map((company: CompanyData) => (
@@ -28,9 +43,11 @@ const CompanyPage = () => {
               </h2>
               <p className="text-lg mb-4">{company.companyEmail}</p>
               <div className="mt-4">
-                <button className="bg-cyan-600 text-white py-2 px-4 rounded">
-                  Remove
-                </button>
+                {!isUserRole && (
+                  <button onClick={() => handleRemoveCompany(company.companyId)} className="bg-cyan-600 text-white py-2 px-4 rounded">
+                    Remove
+                  </button>
+                )}
               </div>
             </li>
           ))}

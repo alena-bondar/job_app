@@ -6,7 +6,8 @@ import Link from "next/link";
 import useStore from '@/store/store';
 
 const JobPage = () => {
-  const { jobs } = useStore();
+  const { jobs, role } = useStore();
+  const isUserRole = role === "user";
   const itemsPerPage = 4;
 
   const totalPages = Math.ceil(jobs.length / itemsPerPage);
@@ -17,13 +18,15 @@ const JobPage = () => {
   };
 
   return (
-    <div className="min-h-screen">
-      <Link
-        className="flex justify-center py-4 text-cyan-600"
-        href={"/job/create"}
-      >
-        Create a new job
-      </Link>
+    <div>
+      {
+        !isUserRole && <Link
+          className="flex justify-center pb-4 text-cyan-600"
+          href={"/job/create"}
+        >
+          Create a new job
+        </Link>
+      }
       {jobs.length ? (
         <Pagination
           getPaginatedJobs={getPaginatedJobs}

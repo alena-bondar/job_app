@@ -1,4 +1,4 @@
-import { IsUUID, MaxLength, MinLength } from 'class-validator';
+import { IsBoolean, IsUUID, MaxLength, MinLength } from 'class-validator';
 
 export class CreateJobDto {
   @IsUUID()
@@ -19,4 +19,7 @@ export class CreateJobDto {
     message: 'Job description is too long. Maximal length is 100 characters',
   })
   jobDescription: string;
+
+  @IsBoolean()
+  deleted: boolean = false;
 }

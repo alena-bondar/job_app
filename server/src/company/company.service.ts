@@ -31,6 +31,19 @@ export class CompanyService {
     return company;
   }
 
+  async markAsDeleted(id: string) {
+    const company = await this.companyRepository.findOne({ companyId: id });
+
+    if (!company) {
+      throw new NotFoundException(`Company not found`);
+    }
+
+    company.deleted = true;
+    await this.em.persistAndFlush(company);
+
+    return company;
+  }
+
   async remove(id: string) {
     const company = await this.companyRepository.findOne({ companyId: id });
     if (!company) {

@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Patch,
+} from '@nestjs/common';
 import { CompanyService } from './company.service';
 import { Company } from './entities/company.entity';
 
@@ -19,6 +27,11 @@ export class CompanyController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.companyService.findOne(id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string) {
+    return this.companyService.markAsDeleted(id);
   }
 
   @Delete(':id')

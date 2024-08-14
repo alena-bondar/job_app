@@ -26,6 +26,7 @@ export class JobService {
       jobName: job.jobName,
       jobDescription: job.jobDescription,
       companyName: job.companyId.companyName,
+      deleted: job.deleted,
     }));
   }
 
@@ -41,7 +42,21 @@ export class JobService {
       jobName: job.jobName,
       jobDescription: job.jobDescription,
       companyName: job.companyId.companyName,
+      deleted: job.deleted,
     };
+  }
+
+  async markAsDeleted(id: string) {
+    const job = await this.jobRepository.findOne({ jobId: id });
+
+    if (!job) {
+      throw new NotFoundException(`Job not found`);
+    }
+
+    job.deleted = true;
+    await this.em.persistAndFlush(job);
+
+    return job;
   }
 
   async remove(id: string): Promise<Job> {

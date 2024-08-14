@@ -1,9 +1,11 @@
 import { create } from "zustand";
-import { CompanyData, JobData } from '@/types';
+import { CompanyData, JobData } from "@/types";
+
+type Role = 'user' | 'admin';
 
 type StoreState = {
-  role: string,
-  setRole: (role: string) => void,
+  role: Role | null;
+  setRole: (role: Role) => void;
   jobs: JobData[];
   setJobs: (jobs: JobData[]) => void;
   companies: CompanyData[];
@@ -11,14 +13,16 @@ type StoreState = {
 };
 
 const useStore = create<StoreState>((set) => ({
-  role: 'user',
+  role: "user",
   jobs: [],
   companies: [],
 
-  setRole: (role) => set({role}),
+  setRole: (role) => {
+    localStorage.setItem("role", role);
+    set({ role });
+  },
   setJobs: (jobs) => set({ jobs }),
   setCompanies: (companies) => set({ companies }),
-
 }));
 
 export default useStore;
