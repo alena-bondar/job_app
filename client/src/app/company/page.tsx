@@ -14,7 +14,7 @@ const CompanyPage = () => {
     try {
       const response = await axios.patch(`/api/company/${id}`);
       if (response.status === 200) {
-        window.location.replace("/job");
+        window.location.replace("/company");
       }
     } catch (error) {
       console.error("Error submitting form:", error);

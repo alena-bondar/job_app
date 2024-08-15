@@ -6,8 +6,10 @@ import "@/styles/globals.css";
 import { useForm, Controller } from "react-hook-form";
 import { CompanyData } from '@/types';
 import { companySchema, FormData, initialValuesCompany } from '@/app/company/create/validation';
+import { useState } from 'react';
 
 const CreateCompanyPage = () => {
+  const [companyExistError, setCompanyExistError] = useState('');
   const {
     control,
     handleSubmit,
@@ -26,6 +28,8 @@ const CreateCompanyPage = () => {
         window.location.replace("/company");
       }
     } catch (error) {
+      // @ts-ignore
+      setCompanyExistError(error.response.data.error);
       console.error("Error submitting form:", error);
     }
   };
@@ -53,9 +57,9 @@ const CreateCompanyPage = () => {
               />
             )}
           />
-          {errors.companyName && (
+          {(errors.companyName || companyExistError) && (
             <div className="text-red-500 text-sm mt-1">
-              {errors.companyName.message}
+              {errors.companyName?.message || companyExistError}
             </div>
           )}
         </div>

@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { EntityManager } from '@mikro-orm/core';
 import { CompanyRepository } from './company.repository';
@@ -13,6 +18,18 @@ export class CompanyService {
   ) {}
 
   async create(companyData: Partial<Company>): Promise<Company> {
+    const isNotUniq = await this.companyRepository.findOne({
+      companyName: companyData.companyName,
+      deleted: false,
+    });
+
+    if (isNotUniq) {
+      throw new HttpException(
+        'Company name already exists',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+
     const company = this.companyRepository.create(companyData);
     await this.em.persistAndFlush(company);
 
@@ -20,7 +37,7 @@ export class CompanyService {
   }
 
   async findAll() {
-    return await this.companyRepository.findAll();
+    return await this.companyRepository.findAll({ where: { deleted: false } });
   }
 
   async findOne(id: string) {

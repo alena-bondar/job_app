@@ -25,7 +25,6 @@ const CreateJobPage = () => {
   });
 
   const onSubmit = async (values: Omit<JobData, "jobId">) => {
-    try {
       const response = await axios.post(`/api/job`, {
         jobName: values.jobName,
         jobDescription: values.jobDescription,
@@ -35,9 +34,6 @@ const CreateJobPage = () => {
         reset();
         window.location.replace("/job");
       }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
   };
 
   return (

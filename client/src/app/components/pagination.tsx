@@ -1,6 +1,8 @@
 import { FC, useEffect, useState } from 'react';
 import { JobData } from "@/types";
 import Link from "next/link";
+import axios from 'axios';
+import useStore from '@/store/store';
 
 type PaginationProps = {
   totalPages: number;
@@ -11,8 +13,11 @@ const Pagination: FC<PaginationProps> = ({
   totalPages,
   getPaginatedJobs,
 }) => {
+  const { role } = useStore();
+
   const [currentPage, setCurrentPage] = useState(1);
   const [paginatedJobs, setPaginatedJobs] = useState<JobData[]>([]);
+  const isUserRole = role === "user";
 
   useEffect(() => {
     setPaginatedJobs(getPaginatedJobs(currentPage));
@@ -24,6 +29,17 @@ const Pagination: FC<PaginationProps> = ({
   };
 
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  const handleRemoveJob = async (id: string) => {
+    try {
+      const response = await axios.patch(`/api/job/${id}`);
+      if (response.status === 200) {
+        window.location.replace("/job");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  };
 
   return (
     <>
@@ -38,13 +54,18 @@ const Pagination: FC<PaginationProps> = ({
             <p className="text-lg mb-4">
               <strong>Company:</strong> {job.companyName}
             </p>
-            <div className="mt-4">
+            <div className="mt-4 flex justify-between">
               <Link
                 className="bg-cyan-600 text-white py-2 px-4 rounded"
                 href={`/job/${job.jobId}`}
               >
                 Go to job description
               </Link>
+              {!isUserRole && (
+                <button onClick={() => handleRemoveJob(job.jobId)} className="bg-cyan-600 text-white py-1 px-4 rounded">
+                  Remove
+                </button>
+              )}
             </div>
           </li>
         ))}

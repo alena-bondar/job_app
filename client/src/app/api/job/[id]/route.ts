@@ -5,7 +5,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   try {
     const { id } = params;
     const response = await axios.patch(
-      `${process.env.NEXT_API_URL}/company/${id}`,
+      `${process.env.NEXT_API_URL}/job/${id}`,
     );
     return new NextResponse(JSON.stringify(response.data), { status: 200 });
   } catch (error) {

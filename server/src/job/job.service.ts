@@ -21,7 +21,9 @@ export class JobService {
   async findAll(): Promise<JobWithCompanyName[]> {
     const jobs = await this.jobRepository.findAllWithCompanyName();
 
-    return jobs.map((job) => ({
+    const jobsWithoutDeleted = jobs.filter((job) => !job.deleted);
+
+    return jobsWithoutDeleted.map((job) => ({
       jobId: job.jobId,
       jobName: job.jobName,
       jobDescription: job.jobDescription,
