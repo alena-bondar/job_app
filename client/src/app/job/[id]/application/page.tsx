@@ -42,7 +42,7 @@ const JobApplicationPage = ({ params }: JobDetailTypes) => {
   };
 
   return (
-    <div className="max-w-lg mx-auto bg-white p-8 shadow-lg rounded-lg">
+    <div className="max-w-lg mx-auto bg-white p-8 mt-8 shadow-lg rounded-lg">
       <h1 className="text-2xl font-bold mb-6 text-center">Apply for Job</h1>
       <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
         <div>

@@ -13,7 +13,7 @@ type StoreState = {
 };
 
 const useStore = create<StoreState>((set) => ({
-  role: "user",
+  role: (typeof window !== "undefined" && localStorage.getItem("role")) as Role,
   jobs: [],
   companies: [],
 

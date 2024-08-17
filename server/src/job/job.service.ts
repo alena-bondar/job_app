@@ -27,7 +27,7 @@ export class JobService {
       jobId: job.jobId,
       jobName: job.jobName,
       jobDescription: job.jobDescription,
-      companyName: job.companyId.companyName,
+      company: job.companyId,
       deleted: job.deleted,
     }));
   }
@@ -43,7 +43,7 @@ export class JobService {
       jobId: job.jobId,
       jobName: job.jobName,
       jobDescription: job.jobDescription,
-      companyName: job.companyId.companyName,
+      company: job.companyId,
       deleted: job.deleted,
     };
   }

@@ -32,6 +32,6 @@ export class Appliances {
   @Property({ columnType: 'text' })
   applianceText!: string;
 
-  @ManyToOne(() => Company, { fieldName: 'company_id', type: 'uuid' })
-  companyId!: Company;
+  @Property()
+  companyId: string;
 }

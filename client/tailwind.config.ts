@@ -15,11 +15,20 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      animation: {
+        spin: 'spin 1s linear infinite',
+      },
+      keyframes: {
+        spin: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+      },
     },
     colors: {
       [ThemeColors.WHITE]: "#ffffff",
       [ThemeColors.CYAN_600]: "#073fb1",
-      [ThemeColors.STALE_800]: "#1e293b",
+      [ThemeColors.STALE_800]: "#002873",
       [ThemeColors.STALE_700]: "#334155",
       [ThemeColors.GRAY_100]: "rgba(249,250,253,0.93)",
       [ThemeColors.GRAY_400]: "#b3b3b3",

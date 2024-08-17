@@ -1,7 +1,7 @@
 "use client";
 
 import "@/styles/globals.css";
-import Pagination from "@/app/components/pagination";
+import PaginationJobs from "@/app/components/paginationJobs";
 import Link from "next/link";
 import useStore from '@/store/store';
 
@@ -28,7 +28,7 @@ const JobPage = () => {
         </Link>
       }
       {jobs.length ? (
-        <Pagination
+        <PaginationJobs
           getPaginatedJobs={getPaginatedJobs}
           totalPages={totalPages}
         />

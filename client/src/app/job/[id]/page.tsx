@@ -13,7 +13,7 @@ const JobDetailPage = async ({ params }: JobDetailTypes) => {
   }
 
   return (
-    <div className="flex flex-col items-center p-12 max-w-2xl mx-auto bg-white shadow-lg rounded-lg">
+    <div className="flex flex-col items-center p-12 mt-8 max-w-2xl mx-auto bg-white shadow-lg rounded-lg">
       <h1 className="text-3xl font-bold mb-4">Job Details</h1>
       <h2 className="text-2xl font-semibold mb-2">{job.jobName}</h2>
       <p className="text-lg mb-4">{job.jobDescription}</p>

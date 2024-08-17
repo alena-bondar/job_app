@@ -197,12 +197,13 @@
         },
         "company_id": {
           "name": "company_id",
-          "type": "uuid",
+          "type": "varchar(255)",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "mappedType": "uuid"
+          "length": 255,
+          "mappedType": "string"
         }
       },
       "name": "appliances",
@@ -241,18 +242,6 @@
             "job_id"
           ],
           "referencedTableName": "public.job",
-          "updateRule": "cascade"
-        },
-        "appliances_company_id_foreign": {
-          "constraintName": "appliances_company_id_foreign",
-          "columnNames": [
-            "company_id"
-          ],
-          "localTableName": "public.appliances",
-          "referencedColumnNames": [
-            "company_id"
-          ],
-          "referencedTableName": "public.company",
           "updateRule": "cascade"
         }
       },
