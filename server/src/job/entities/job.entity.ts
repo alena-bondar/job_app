@@ -1,6 +1,7 @@
 import { v4 } from 'uuid';
-import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
+import { Entity, ManyToOne, PrimaryKey, Property } from '@mikro-orm/core';
 import { JobRepository } from '../job.repository';
+import { Company } from '../../company/entities/company.entity';
 
 @Entity({ repository: () => JobRepository })
 export class Job {
@@ -13,6 +14,9 @@ export class Job {
   @Property()
   jobDescription!: string;
 
-  @Property({ unique: true })
-  companyName!: string;
+  @ManyToOne(() => Company, { fieldName: 'company_id', type: 'uuid' })
+  companyId!: Company;
+
+  @Property()
+  deleted: boolean = false;
 }

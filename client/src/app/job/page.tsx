@@ -1,23 +1,14 @@
 "use client";
 
-import axios from "axios";
 import "@/styles/globals.css";
-import { useEffect, useState } from "react";
-import { JobData } from "@/types";
-import Pagination from "@/app/components/pagination";
+import PaginationJobs from "@/app/components/paginationJobs";
+import Link from "next/link";
+import useStore from '@/store/store';
 
 const JobPage = () => {
-  const [jobs, setJobs] = useState<JobData[]>([]);
+  const { jobs, role } = useStore();
+  const isUserRole = role === "user";
   const itemsPerPage = 4;
-
-  useEffect(() => {
-    const getJobs = async () => {
-      const fetchedJobs = await axios.get(`/api/job`);
-      setJobs(fetchedJobs.data);
-    };
-
-    getJobs();
-  }, []);
 
   const totalPages = Math.ceil(jobs.length / itemsPerPage);
 
@@ -27,10 +18,17 @@ const JobPage = () => {
   };
 
   return (
-    <div className="min-h-screen pt-4 px-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">All Jobs</h1>
+    <div>
+      {
+        !isUserRole && <Link
+          className="flex justify-center pb-4 text-cyan-600"
+          href={"/job/create"}
+        >
+          Create a new job
+        </Link>
+      }
       {jobs.length ? (
-        <Pagination
+        <PaginationJobs
           getPaginatedJobs={getPaginatedJobs}
           totalPages={totalPages}
         />
