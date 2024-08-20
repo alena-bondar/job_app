@@ -1,5 +1,5 @@
 import axios from "axios";
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
   const res = await axios.get(`${process.env.NEXT_API_URL}/company`);
@@ -22,6 +22,8 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     // @ts-ignore
     const errorMessage = error.response?.data?.message || "Error posting data";
-    return new NextResponse(JSON.stringify({ error: errorMessage }), { status: 500 });
+    return new NextResponse(JSON.stringify({ error: errorMessage }), {
+      status: 500,
+    });
   }
 }

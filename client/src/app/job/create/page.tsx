@@ -10,7 +10,7 @@ import {
   FormData,
 } from "@/app/job/create/validation";
 import { JobData } from "@/types";
-import useStore from '@/store/store';
+import useStore from "@/store/store";
 
 const CreateJobPage = () => {
   const { companies } = useStore();
@@ -25,15 +25,15 @@ const CreateJobPage = () => {
   });
 
   const onSubmit = async (values: Omit<JobData, "jobId">) => {
-      const response = await axios.post(`/api/job`, {
-        jobName: values.jobName,
-        jobDescription: values.jobDescription,
-        companyId: values.companyName,
-      });
-      if (response.status === 200) {
-        reset();
-        window.location.replace("/job");
-      }
+    const response = await axios.post(`/api/job`, {
+      jobName: values.jobName,
+      jobDescription: values.jobDescription,
+      companyId: values.companyName,
+    });
+    if (response.status === 200) {
+      reset();
+      window.location.replace("/job");
+    }
   };
 
   return (

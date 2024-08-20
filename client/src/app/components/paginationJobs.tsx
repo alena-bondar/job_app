@@ -1,8 +1,8 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from "react";
 import { JobData } from "@/types";
 import Link from "next/link";
-import axios from 'axios';
-import useStore from '@/store/store';
+import axios from "axios";
+import useStore from "@/store/store";
 
 type PaginationProps = {
   totalPages: number;
@@ -19,7 +19,6 @@ const PaginationJobs: FC<PaginationProps> = ({
   const [paginatedJobs, setPaginatedJobs] = useState<JobData[]>([]);
   const isUserRole = role === "user";
 
-  console.log('paginatedJobs', paginatedJobs);
   useEffect(() => {
     setPaginatedJobs(getPaginatedJobs(currentPage));
   }, [currentPage, getPaginatedJobs]);
@@ -53,7 +52,7 @@ const PaginationJobs: FC<PaginationProps> = ({
             <div className="flex w-full justify-between">
               <h2 className="text-2xl font-semibold mb-2">{job.jobName}</h2>
               <p className="text-lg mb-4">
-                <strong>Company:</strong> {job.company.companyName}
+                <strong>Company:</strong> {job.companyName}
               </p>
             </div>
             <p className="text-lg mb-4">{job.jobDescription}</p>
@@ -94,8 +93,8 @@ const PaginationJobs: FC<PaginationProps> = ({
                   onClick={() => handlePageChange(page)}
                   className={`flex items-center justify-center px-3 h-8 ${
                     currentPage === page
-                      ? 'z-10 text-cyan-600 font-semibold'
-                      : 'hover:text-cyan-600'
+                      ? "z-10 text-cyan-600 font-semibold"
+                      : "hover:text-cyan-600"
                   }`}
                 >
                   {page}

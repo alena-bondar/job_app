@@ -3,7 +3,7 @@
 import "@/styles/globals.css";
 import PaginationJobs from "@/app/components/paginationJobs";
 import Link from "next/link";
-import useStore from '@/store/store';
+import useStore from "@/store/store";
 
 const JobPage = () => {
   const { jobs, role } = useStore();
@@ -19,14 +19,14 @@ const JobPage = () => {
 
   return (
     <div>
-      {
-        !isUserRole && <Link
+      {!isUserRole && (
+        <Link
           className="flex justify-center pb-4 text-cyan-600"
           href={"/job/create"}
         >
           Create a new job
         </Link>
-      }
+      )}
       {jobs.length ? (
         <PaginationJobs
           getPaginatedJobs={getPaginatedJobs}

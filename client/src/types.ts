@@ -2,7 +2,7 @@ export type JobData = {
   jobId: string;
   jobName: string;
   jobDescription: string;
-  company: CompanyData;
+  companyName: string;
 };
 
 export type JobDetailTypes = {
@@ -23,4 +23,4 @@ export type CompanyData = {
   companyName: string;
   companyEmail: string;
   deleted: boolean;
-}
+};

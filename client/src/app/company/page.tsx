@@ -3,7 +3,7 @@
 import "@/styles/globals.css";
 import Link from "next/link";
 import useStore from "@/store/store";
-import PaginationCompanies from '@/app/components/paginationCompanies';
+import PaginationCompanies from "@/app/components/paginationCompanies";
 
 const CompanyPage = () => {
   const { companies, role } = useStore();
@@ -32,7 +32,7 @@ const CompanyPage = () => {
         <PaginationCompanies
           getPaginatedCompanies={getPaginatedCompanies}
           totalPages={totalPages}
-         />
+        />
       ) : (
         <p className="text-center text-lg">No companies available.</p>
       )}

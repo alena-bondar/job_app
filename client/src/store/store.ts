@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { CompanyData, JobData } from "@/types";
 
-type Role = 'user' | 'admin';
+type Role = "user" | "admin";
 
 type StoreState = {
   role: Role | null;

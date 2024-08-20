@@ -4,12 +4,16 @@ import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import "@/styles/globals.css";
 import { useForm, Controller } from "react-hook-form";
-import { CompanyData } from '@/types';
-import { companySchema, FormData, initialValuesCompany } from '@/app/company/create/validation';
-import { useState } from 'react';
+import { CompanyData } from "@/types";
+import {
+  companySchema,
+  FormData,
+  initialValuesCompany,
+} from "@/app/company/create/validation";
+import { useState } from "react";
 
 const CreateCompanyPage = () => {
-  const [companyExistError, setCompanyExistError] = useState('');
+  const [companyExistError, setCompanyExistError] = useState("");
   const {
     control,
     handleSubmit,
@@ -20,7 +24,7 @@ const CreateCompanyPage = () => {
     defaultValues: initialValuesCompany,
   });
 
-  const onSubmit = async (values: Omit<CompanyData, 'companyId'>) => {
+  const onSubmit = async (values: Omit<CompanyData, "companyId">) => {
     try {
       const response = await axios.post(`/api/company`, values);
       if (response.status === 200) {
@@ -36,7 +40,9 @@ const CreateCompanyPage = () => {
 
   return (
     <div className="max-w-lg mx-auto bg-white p-8 mt-8 shadow-lg rounded-lg">
-      <h1 className="text-2xl font-bold mb-6 text-center">Create a new company</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center">
+        Create a new company
+      </h1>
       <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label

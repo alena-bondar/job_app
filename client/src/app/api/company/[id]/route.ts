@@ -1,7 +1,10 @@
 import axios from "axios";
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: { id: string } },
+) {
   try {
     const { id } = params;
     const response = await axios.patch(
