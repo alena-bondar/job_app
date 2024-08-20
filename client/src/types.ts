@@ -2,6 +2,12 @@ export type JobData = {
   jobId: string;
   jobName: string;
   jobDescription: string;
+  company: CompanyData;
+};
+
+export type JobCreateData = {
+  jobName: string;
+  jobDescription: string;
   companyName: string;
 };
 
@@ -22,5 +28,4 @@ export type CompanyData = {
   companyId: string;
   companyName: string;
   companyEmail: string;
-  deleted: boolean;
 };

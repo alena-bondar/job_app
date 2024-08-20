@@ -18,7 +18,7 @@ const JobDetailPage = async ({ params }: JobDetailTypes) => {
       <h2 className="text-2xl font-semibold mb-2">{job.jobName}</h2>
       <p className="text-lg mb-4">{job.jobDescription}</p>
       <p className="text-lg mb-4">
-        <strong>Company:</strong> {job.companyName}
+        <strong>Company:</strong> {job.company.companyName}
       </p>
       <div className="mt-4">
         <Link

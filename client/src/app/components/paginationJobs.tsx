@@ -52,7 +52,7 @@ const PaginationJobs: FC<PaginationProps> = ({
             <div className="flex w-full justify-between">
               <h2 className="text-2xl font-semibold mb-2">{job.jobName}</h2>
               <p className="text-lg mb-4">
-                <strong>Company:</strong> {job.companyName}
+                <strong>Company:</strong> {job.company.companyName}
               </p>
             </div>
             <p className="text-lg mb-4">{job.jobDescription}</p>

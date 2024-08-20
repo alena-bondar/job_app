@@ -34,7 +34,6 @@ const CreateCompanyPage = () => {
     } catch (error) {
       // @ts-ignore
       setCompanyExistError(error.response.data.error);
-      console.error("Error submitting form:", error);
     }
   };
 

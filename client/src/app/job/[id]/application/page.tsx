@@ -10,9 +10,11 @@ import {
   FormData,
   initialValuesApplication,
 } from "@/app/job/[id]/application/validation";
+import { useState } from "react";
 
 const JobApplicationPage = ({ params }: JobDetailTypes) => {
   const { id } = params;
+  const [applicationExistError, setApplicationExistError] = useState("");
 
   const {
     control,
@@ -37,7 +39,8 @@ const JobApplicationPage = ({ params }: JobDetailTypes) => {
         window.location.replace("/job");
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
+      // @ts-ignore
+      setApplicationExistError(error.response.data.error);
     }
   };
 
@@ -119,10 +122,15 @@ const JobApplicationPage = ({ params }: JobDetailTypes) => {
             </div>
           )}
         </div>
+        {applicationExistError && (
+          <div className="text-red-500 text-sm mt-1">
+            {applicationExistError}
+          </div>
+        )}
         <button
           type="submit"
-          disabled={isSubmitting}
-          className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-cyan-600"
+          disabled={isSubmitting || !!applicationExistError}
+          className={`w-full flex justify-center py-4 px-4 border border-transparent text-sm font-medium rounded-md text-white ${isSubmitting || !!applicationExistError ? "bg-gray-400" : "bg-cyan-600"}`}
         >
           {isSubmitting ? "Submitting..." : "Submit Application"}
         </button>

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { EntityManager } from '@mikro-orm/core';
 import { AppliancesRepository } from './appliances.repository';
@@ -16,6 +16,17 @@ export class AppliancesService {
   async create(appliancesData: Partial<Appliances>): Promise<Appliances> {
     const jobId = appliancesData.jobId;
     const job = await this.appliancesRepository.findJobByJobId(jobId);
+
+    const isNotUniq = await this.appliancesRepository.findOne({
+      jobId: jobId,
+    });
+
+    if (isNotUniq) {
+      throw new HttpException(
+        'You already applied for this job',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
 
     const { companyEmail } =
       await this.appliancesRepository.findEmailByCompanyId(

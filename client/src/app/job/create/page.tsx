@@ -9,7 +9,7 @@ import {
   jobSchema,
   FormData,
 } from "@/app/job/create/validation";
-import { JobData } from "@/types";
+import { JobCreateData } from "@/types";
 import useStore from "@/store/store";
 
 const CreateJobPage = () => {
@@ -24,7 +24,7 @@ const CreateJobPage = () => {
     defaultValues: initialValuesJob,
   });
 
-  const onSubmit = async (values: Omit<JobData, "jobId">) => {
+  const onSubmit = async (values: JobCreateData) => {
     const response = await axios.post(`/api/job`, {
       jobName: values.jobName,
       jobDescription: values.jobDescription,

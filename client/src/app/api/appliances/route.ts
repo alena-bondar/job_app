@@ -15,7 +15,10 @@ export async function POST(req: NextRequest) {
     );
     return new NextResponse(JSON.stringify(response.data), { status: 200 });
   } catch (error) {
-    console.error("Error posting data:", error);
-    return new NextResponse("Error posting data", { status: 500 });
+    // @ts-ignore
+    const errorMessage = error.response?.data?.message || "Error posting data";
+    return new NextResponse(JSON.stringify({ error: errorMessage }), {
+      status: 500,
+    });
   }
 }
