@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "concurrently \"npm run dev:nest\" \"npm run dev:next\"",
     "dev:nest": "cd server && npm run start:dev",
     "dev:next": "cd client && npm run dev",
-    "dev": "concurrently \"npm run dev:nest\" \"npm run dev:next\"",
-    "install-all": "npm install && npm install --prefix client && npm install --prefix server"
+    "install-all": "npm install && npm install --prefix client && npm install --prefix server",
+    "migration:up": "npm run migration:up --prefix server",
+    "migration:create": "npm run migration:create --prefix server"
   },
   "author": "",
   "license": "ISC",
